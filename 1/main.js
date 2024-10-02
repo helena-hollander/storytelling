@@ -1,11 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import ModelLoader from '../modules/3dmodel';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 console.log('Hello from main.js');
 
-const modelLoader = new ModelLoader();
 
 var _canvasEl = document.getElementById("three");
 
@@ -57,8 +55,47 @@ function buildCube(x, y, z){
     return _cube;
 };
 
-buildCube(0, 0, 0);
+//buildCube(0, 0, 0);
 
+//3dModel loader:
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+var _3dmodel;
+const loader = new GLTFLoader().setPath('assets/3dmodels/'); // Set the path to the directory containing the model
+
+loader.load('deadbird.glb', function (gltf) {
+    // Assign the loaded model to _3dmodel
+    _3dmodel = gltf.scene;
+    
+    // Set the scale and position of the model
+    _3dmodel.scale.set(1, 1, 1);
+    _3dmodel.position.set(0, 3, -2);
+    
+    // Loop through meshes to make them cast/receive shadows
+    _3dmodel.traverse(function (child) {
+        if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+        }
+    });
+
+    // Add the model to the scene
+    _scene.add(_3dmodel);
+
+    // GUI and variant handling (if needed)
+    const parser = gltf.parser;
+    const variantsExtension = gltf.userData.gltfExtensions['KHR_materials_variants'];
+    const variants = variantsExtension.variants.map((variant) => variant.name);
+    // const variantsCtrl = gui.add(state, 'variant', variants).name('Variant');
+    // selectVariant(scene, parser, variantsExtension, state.variant);
+    // variantsCtrl.onChange((value) => selectVariant(scene, parser, variantsExtension, value));
+}, undefined, function (error) {
+    console.error('An error happened while loading the model:', error);
+});
+
+
+						
 
 
 
