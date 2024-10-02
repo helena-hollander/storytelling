@@ -1,7 +1,11 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import ModelLoader from '../modules/3dmodel';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 console.log('Hello from main.js');
+
+const modelLoader = new ModelLoader();
 
 var _canvasEl = document.getElementById("three");
 
@@ -9,12 +13,27 @@ var _canvasEl = document.getElementById("three");
 var _vw = window.innerWidth;
 var _vh = window.innerHeight;
 
+
+
 //Create a scene:
 const _scene = new THREE.Scene();
 const _camera = new THREE.PerspectiveCamera(50, _vw / _vh, .1, 1000);
-const _renderer = new THREE.WebGLRenderer({canvas: _canvasEl}); 
+_scene.background = new THREE.Color(0x222222);
+const _renderer = new THREE.WebGLRenderer({canvas: _canvasEl, antialias:true}); //antialias: true giver en blødere render
 _renderer.setSize(_vw, _vh);
+_renderer.setPixelRatio(window.devicePixelRatio); //Pixel ratio følge dvice
 _renderer.setAnimationLoop(animate);
+_renderer.shadowMap.enabled = true; //skygger i map
+_renderer.shadowMap.type = THREE.PCFSoftShadowMap; //bløde skygger
+//Visualiserer akserne x, y, z
+const _axeshelper = new THREE.AxesHelper(2);
+_scene.add(_axeshelper);
+
+
+//LYS:
+const _ambientlight = new THREE.AmbientLight(0xffffff, 2); //Her laver vi et ambient lys, der lyser hele scenen op, med en farve og en intensitet
+_scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
+
 
 //ANIMATE
 function animate() {
@@ -28,16 +47,26 @@ _renderer.setAnimationLoop( animate );
 function buildCube(x, y, z){
     var _cube;
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
     _cube = new THREE.Mesh(geometry, material);
     _cube.position.set(x, y, z);
+    _cube.castShadow = true; //Her siger vi at vores kasse skal kaste skygger
+  _cube.receiveShadow = true; //Her siger vi at vores kasse skal modtage skygger
+
     _scene.add(_cube);
     return _cube;
 };
 
 buildCube(0, 0, 0);
 
-
+// modelLoader.loadModel('assets/3dmodels/deadbird.glb') //indsæt model
+//     .then((model) => {
+//         console.log('Model loaded successfully:', model);
+//         // Add your rendering logic here
+//     })
+//     .catch((error) => {
+//         console.error('Error loading model:', error);
+//     });
 
 
 
@@ -46,6 +75,7 @@ buildCube(0, 0, 0);
 
 //INIT:
 _camera.position.z = 5;
+
 
 
 //dtr function
