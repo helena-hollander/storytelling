@@ -59,15 +59,6 @@ function buildCube(x, y, z){
 
 buildCube(0, 0, 0);
 
-// modelLoader.loadModel('assets/3dmodels/deadbird.glb') //indsæt model
-//     .then((model) => {
-//         console.log('Model loaded successfully:', model);
-//         // Add your rendering logic here
-//     })
-//     .catch((error) => {
-//         console.error('Error loading model:', error);
-//     });
-
 
 
 
