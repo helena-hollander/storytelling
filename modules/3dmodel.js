@@ -11,6 +11,7 @@ export default class ThreeDModel {
   _position = { x: 0, y: 0, z: 0 };
   _lyd = null;
   _mixer = null;
+  _offset = Math.round(Math.random() * 10);
 
   constructor(modelUrl, x, y, z, lyd, sceneRef) {
     this.modelUrl = modelUrl;
@@ -28,7 +29,12 @@ export default class ThreeDModel {
     loader.load('../assets/3dmodels/' + this.modelUrl, (gltf) => {
       this._3dmodel = gltf.scene;
       this._mixer = new THREE.AnimationMixer(this._3dmodel);
-      this._mixer.clipAction(gltf.animations[0]).play();
+      // this._mixer.clipAction(gltf.animations[0]).play();
+      gltf.animations.forEach((clip) => {
+        const action = this._mixer.clipAction(clip);
+        action.time = this._offset;
+        action.play();
+      });
       this._3dmodel.scale.set(1, 1, 1);
       this._3dmodel.position.set(this._position.x, this._position.y, this._position.z);
       this._sceneRef.add(this._3dmodel);

@@ -34,30 +34,46 @@ const _ambientlight = new THREE.AmbientLight(0xffffff, 2); //Her laver vi et amb
 _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 
 
+
 //3dModel loader:
-const deadbird = new ThreeDModel('deadbirdhvid.glb', 0, -10, -10, undefined, _scene);
+//const deadbird = new ThreeDModel('deadbirdhvid.glb', 0, -30, -10, undefined, _scene);
+//const deadbird2 = new ThreeDModel('deadbirdhvid.glb', 0, -10, -10, undefined, _scene);
+const blommetrae = new ThreeDModel('blommetrae_copy_oli.glb', 0, -8, -10, undefined, _scene);
 
 const allThingsINedAnimated = [
-  deadbird,
+  // deadbird, deadbird2, 
+  blommetrae,
 ]
+
+// const spacing = 40
+// for(let i = 0; i < 200; i++){ 
+//   const x = Math.random() * (spacing * 2) - spacing;
+//   const y = Math.random() * (spacing * 2) - spacing;
+//   const z = Math.random() * (spacing * 2) - spacing;
+//   const newThing = new ThreeDModel('deadbirdhvid.glb', x, y, z, undefined, _scene);
+//   allThingsINedAnimated.push(newThing);
+// }
 
 //CLOCK:
 const clock = new THREE.Clock();
 
 
 //ANIMATE
+
+
 function animate() {
   _renderer.render(_scene, _camera);
   console.log("animate");
-  
+
+  const delta = clock.getDelta()
   allThingsINedAnimated.forEach((thing) => {
     if(thing._mixer){
-      thing._mixer.update(clock.getDelta());
+      thing._mixer.update(delta);
+    
     }
     
   })
-  //deadbird._mixer.update(clock.getDelta()); //Udkommater for at pause
-  
+
   
 }
 _renderer.setAnimationLoop( animate );
@@ -100,7 +116,7 @@ function buildCube(x, y, z){
 
 
 //INIT:
-_camera.position.z = 10;
+_camera.position.z = 5;
 
 
 
