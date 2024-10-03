@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import GSAP from 'gsap';
+import ThreeDModel from '../modules/3dmodel';
+//import GUI from 'lil-gui';  
 
 console.log('Hello from main.js');
 
@@ -12,7 +15,6 @@ var _vw = window.innerWidth;
 var _vh = window.innerHeight;
 
 
-
 //Create a scene:
 const _scene = new THREE.Scene();
 const _camera = new THREE.PerspectiveCamera(50, _vw / _vh, .1, 1000);
@@ -20,7 +22,6 @@ _scene.background = new THREE.Color(0x222222);
 const _renderer = new THREE.WebGLRenderer({canvas: _canvasEl, antialias:true}); //antialias: true giver en blødere render
 _renderer.setSize(_vw, _vh);
 _renderer.setPixelRatio(window.devicePixelRatio); //Pixel ratio følge dvice
-_renderer.setAnimationLoop(animate);
 _renderer.shadowMap.enabled = true; //skygger i map
 _renderer.shadowMap.type = THREE.PCFSoftShadowMap; //bløde skygger
 //Visualiserer akserne x, y, z
@@ -33,14 +34,36 @@ const _ambientlight = new THREE.AmbientLight(0xffffff, 2); //Her laver vi et amb
 _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 
 
+//3dModel loader:
+const deadbird = new ThreeDModel('deadbirdhvid.glb', 0, -10, -10, undefined, _scene);
+
+const allThingsINedAnimated = [
+  deadbird,
+]
+
+//CLOCK:
+const clock = new THREE.Clock();
+
+
 //ANIMATE
 function animate() {
-    _renderer.render(_scene, _camera);
-    console.log("animate");
+  _renderer.render(_scene, _camera);
+  console.log("animate");
+  
+  allThingsINedAnimated.forEach((thing) => {
+    if(thing._mixer){
+      thing._mixer.update(clock.getDelta());
+    }
+    
+  })
+  //deadbird._mixer.update(clock.getDelta()); //Udkommater for at pause
+  
+  
 }
 _renderer.setAnimationLoop( animate );
 
 //New _cube function
+
 
 function buildCube(x, y, z){
     var _cube;
@@ -57,52 +80,27 @@ function buildCube(x, y, z){
 
 //buildCube(0, 0, 0);
 
-//3dModel loader:
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-var _3dmodel;
-const loader = new GLTFLoader().setPath('assets/3dmodels/'); // Set the path to the directory containing the model
 
-loader.load('deadbird.glb', function (gltf) {
-    // Assign the loaded model to _3dmodel
-    _3dmodel = gltf.scene;
-    
-    // Set the scale and position of the model
-    _3dmodel.scale.set(1, 1, 1);
-    _3dmodel.position.set(0, 3, -2);
-    
-    // Loop through meshes to make them cast/receive shadows
-    _3dmodel.traverse(function (child) {
-        if (child.isMesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-        }
-    });
 
-    // Add the model to the scene
-    _scene.add(_3dmodel);
 
-    // GUI and variant handling (if needed)
-    const parser = gltf.parser;
-    const variantsExtension = gltf.userData.gltfExtensions['KHR_materials_variants'];
-    const variants = variantsExtension.variants.map((variant) => variant.name);
-    // const variantsCtrl = gui.add(state, 'variant', variants).name('Variant');
-    // selectVariant(scene, parser, variantsExtension, state.variant);
-    // variantsCtrl.onChange((value) => selectVariant(scene, parser, variantsExtension, value));
-}, undefined, function (error) {
-    console.error('An error happened while loading the model:', error);
-});
 
 
 						
 
 
+//Lil GUI:
+// const gui = new GUI();
+// const _3dfolder = gui.addFolder("3dmodel position");
+// _3dfolder.add(_3dmodel.position, "x", -10, 10, 0.1);
+// _3dfolder.add(_3dmodel.position, "y", -10, 10, 0.1);
+// _3dfolder.add(_3dmodel.position, "z", -10, 10, 0.1);
+
 
 
 
 //INIT:
-_camera.position.z = 5;
+_camera.position.z = 10;
 
 
 
