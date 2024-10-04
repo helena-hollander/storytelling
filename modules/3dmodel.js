@@ -47,8 +47,8 @@ export default class ThreeDModel {
       this._3dmodel.mesh = this._mesh;
       
      //Noget med mesh... og skygger 
-     this._3dmodel.castShadow = true;
-     this._3dmodel.receiveShadow = true;
+     this._3dmodel.mesh.castShadow = true;
+     this._3dmodel.mesh.receiveShadow = true;
       this._sceneRef.add(this._3dmodel);
     }, undefined, (error) => {
       console.error('An error happened while loading the model:', error);

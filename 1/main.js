@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import GSAP from 'gsap';
 import ThreeDModel from '../modules/3dmodel';
-//import GUI from 'lil-gui';  
+import GUI from 'lil-gui';  
 
 console.log('Hello from main.js');
 
@@ -39,10 +39,15 @@ _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 const powerPlant = new ThreeDModel('powerplantdeadbirds1.glb', 0, -35, -18, dtr(0), 0.7, THREE.MeshPhongMaterial, undefined, _scene);
 const deadbird = new ThreeDModel('deadbirdhvid.glb', -10, 3, -10, dtr(0), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
 const deadbird2 = new ThreeDModel('deadbirdhvid.glb', 6, 0, -12, dtr(20), 0.5, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird3 = new ThreeDModel('deadbird_lang.glb', 14, 0, -12, dtr(20), 0.2, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird4 = new ThreeDModel('deadbird_lang2.glb', -8, -6, -14, dtr(20), 0.2, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird5 = new ThreeDModel('deadbird_lang2.glb', 8, -8, -16, dtr(20), 0.18, THREE.MeshPhongMaterial, undefined, _scene);
+//scene1.2
+const deadbird6 = new ThreeDModel('deadbird_lang2.glb', 4, -28, -6, dtr(20), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
 //const blommetrae = new ThreeDModel('blommetrae_copy_oli.glb', 0, -6, -10, dtr(-190), 0.7, undefined, _scene); //evt gøt snot meget længere, exporter ny med textur. Og så bare behold alle atributes, men træk ned ad y-aksen.
 
 const allThingsINedAnimated = [
-powerPlant, deadbird, deadbird2, 
+powerPlant, deadbird, deadbird2, deadbird3, deadbird4, deadbird5, deadbird6
 ]
 
 // const spacing = 40
@@ -106,11 +111,11 @@ function buildCube(x, y, z){
 
 
 //Lil GUI:
-// const gui = new GUI();
-// const _3dfolder = gui.addFolder("3dmodel position");
-// _3dfolder.add(_3dmodel.position, "x", -10, 10, 0.1);
-// _3dfolder.add(_3dmodel.position, "y", -10, 10, 0.1);
-// _3dfolder.add(_3dmodel.position, "z", -10, 10, 0.1);
+const gui = new GUI();
+const _Camfolder = gui.addFolder("Camera position");
+_Camfolder.add(_camera.position, "x", -10, 10, 0.1);
+_Camfolder.add(_camera.position, "y", -100, 10, 0.1);
+_Camfolder.add(_camera.position, "z", -10, 10, 0.1);
 
 
 
