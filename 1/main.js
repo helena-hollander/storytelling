@@ -36,13 +36,13 @@ _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 
 
 //3dModel loader:
+//const powerPlant = new ThreeDModel('powerplant1.glb', 0, 0, -10, undefined, _scene);
 //const deadbird = new ThreeDModel('deadbirdhvid.glb', 0, -30, -10, undefined, _scene);
 //const deadbird2 = new ThreeDModel('deadbirdhvid.glb', 0, -10, -10, undefined, _scene);
-const blommetrae = new ThreeDModel('blommetrae_copy_oli.glb', 0, -8, -10, undefined, _scene);
+//const blommetrae = new ThreeDModel('blommetrae_copy_oli.glb', 0, -6, -10, dtr(-190), 0.7, undefined, _scene); //evt gøt snot meget længere, exporter ny med textur. Og så bare behold alle atributes, men træk ned ad y-aksen.
 
 const allThingsINedAnimated = [
-  // deadbird, deadbird2, 
-  blommetrae,
+  // deadbird, deadbird2, blommetrae,
 ]
 
 // const spacing = 40

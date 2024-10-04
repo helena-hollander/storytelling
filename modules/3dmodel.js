@@ -9,17 +9,21 @@ export default class ThreeDModel {
   _3dmodel = null;
   _sceneRef;
   _position = { x: 0, y: 0, z: 0 };
+  _rotation = { x: 0, y: 0, z: 0 };
+  _scale = 1; 
   _lyd = null;
   _mixer = null;
   _offset = Math.round(Math.random() * 10);
 
-  constructor(modelUrl, x, y, z, lyd, sceneRef) {
+  constructor(modelUrl, x, y, z, rY, scale, lyd, sceneRef) {
     this.modelUrl = modelUrl;
     this._sceneRef = sceneRef;
     this._lyd = lyd;
     this._position.x = x;
     this._position.y = y;
     this._position.z = z;
+    this._rotation.y = rY;
+    this._scale = scale;
     this.loadModel();
   }
 
@@ -37,6 +41,10 @@ export default class ThreeDModel {
       });
       this._3dmodel.scale.set(1, 1, 1);
       this._3dmodel.position.set(this._position.x, this._position.y, this._position.z);
+      this._3dmodel.rotation.set(0, this._rotation.y, 0);
+      this._3dmodel.scale.set(this._scale, this._scale, this._scale);
+      this._3dmodel.castShadow = true;
+      this._3dmodel.receiveShadow = true;
       this._sceneRef.add(this._3dmodel);
     }, undefined, (error) => {
       console.error('An error happened while loading the model:', error);
