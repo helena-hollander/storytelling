@@ -18,7 +18,7 @@ var _vh = window.innerHeight;
 //Create a scene:
 const _scene = new THREE.Scene();
 const _camera = new THREE.PerspectiveCamera(50, _vw / _vh, .1, 1000);
-_scene.background = new THREE.Color(0x222222);
+_scene.background = new THREE.Color(0x4680b0);
 const _renderer = new THREE.WebGLRenderer({canvas: _canvasEl, antialias:true}); //antialias: true giver en blødere render
 _renderer.setSize(_vw, _vh);
 _renderer.setPixelRatio(window.devicePixelRatio); //Pixel ratio følge dvice
@@ -36,7 +36,7 @@ _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 
 
 //3dModel loader:
-const powerPlant = new ThreeDModel('powerplantdeadbirds1.glb', 0, -35, -18, dtr(0), 0.7, THREE.MeshPhongMaterial, undefined, _scene);
+const powerPlant = new ThreeDModel('powerplant2blend.glb', 0, -35, -18, dtr(0), 0.7, THREE.MeshPhongMaterial, undefined, _scene);
 const deadbird = new ThreeDModel('deadbirdhvid.glb', -10, 3, -10, dtr(0), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
 const deadbird2 = new ThreeDModel('deadbirdhvid.glb', 6, 0, -12, dtr(20), 0.5, THREE.MeshPhongMaterial, undefined, _scene);
 const deadbird3 = new ThreeDModel('deadbird_lang.glb', 14, 0, -12, dtr(20), 0.2, THREE.MeshPhongMaterial, undefined, _scene);
@@ -114,7 +114,7 @@ function buildCube(x, y, z){
 const gui = new GUI();
 const _Camfolder = gui.addFolder("Camera position");
 _Camfolder.add(_camera.position, "x", -10, 10, 0.1);
-_Camfolder.add(_camera.position, "y", -100, 10, 0.1);
+_Camfolder.add(_camera.position, "y", -100, 0, 0.1);
 _Camfolder.add(_camera.position, "z", -10, 10, 0.1);
 
 
