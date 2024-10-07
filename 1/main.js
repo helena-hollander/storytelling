@@ -26,7 +26,7 @@ _renderer.setPixelRatio(window.devicePixelRatio); //Pixel ratio følge dvice
 _renderer.shadowMap.enabled = true; //skygger i map
 _renderer.shadowMap.type = THREE.PCFSoftShadowMap; //bløde skygger
 //Visualiserer akserne x, y, z
-const _axeshelper = new THREE.AxesHelper(2);
+//const _axeshelper = new THREE.AxesHelper(2);
 // _scene.add(_axeshelper);
 
 

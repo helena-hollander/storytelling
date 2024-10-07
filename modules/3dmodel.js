@@ -14,6 +14,7 @@ export default class ThreeDModel {
   _mixer = null;
   _offset = Math.round(Math.random() * 10);
   _that = this;
+  _soundPlayed = false;
 
   constructor(modelUrl, x, y, z, rY, scale, mesh, soundUrl, sceneRef) {
     this.modelUrl = modelUrl;
