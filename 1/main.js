@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import GSAP from 'gsap';
 import ThreeDModel from '../modules/3dmodel';
 import GUI from 'lil-gui';  
+import WheelFunction from '../modules/wheelFunction';
 
 console.log('Hello from main.js');
 
@@ -26,7 +27,7 @@ _renderer.shadowMap.enabled = true; //skygger i map
 _renderer.shadowMap.type = THREE.PCFSoftShadowMap; //bløde skygger
 //Visualiserer akserne x, y, z
 const _axeshelper = new THREE.AxesHelper(2);
-_scene.add(_axeshelper);
+// _scene.add(_axeshelper);
 
 
 //LYS:
@@ -36,42 +37,82 @@ _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 
 
 //3dModel loader:
-const powerPlant = new ThreeDModel('powerplantbirds1.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, undefined, _scene);
-const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird = new ThreeDModel('deadbird.glb', -70, 3, -90, dtr(0), 1, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird2 = new ThreeDModel('deadbird.glb', 16, 10, -46, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird3 = new ThreeDModel('deadbird.glb', 24, 0, -172, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird4 = new ThreeDModel('deadbird.glb', -38, -36, -184, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);const deadbird5 = new ThreeDModel('deadbird.glb', 18, -18, -16, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
-//scene1.2
-const deadbird6 = new ThreeDModel('deadbird.glb', 4, -28, -6, dtr(20), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird7 = new ThreeDModel('deadbird.glb', -8, -34, -16, dtr(20), 0.8, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird8 = new ThreeDModel('deadbird.glb', -68, -134, -116, dtr(20), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird9 = new ThreeDModel('deadbird.glb', 68, -104, -176, dtr(20), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
-const tricycle = new ThreeDModel('tricycle.glb', 0, -164, -20, dtr(-45), 1.4, THREE.MeshPhongMaterial, undefined, _scene);
+// const powerPlant = new ThreeDModel('powerplantbirds1.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, undefined, _scene);
+// const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
+// const deadbird = new ThreeDModel('deadbird.glb', -70, 3, -90, dtr(0), 1, THREE.MeshPhongMaterial, undefined, _scene);
+// const deadbird2 = new ThreeDModel('deadbird.glb', 16, 10, -46, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
+// const deadbird3 = new ThreeDModel('deadbird.glb', 24, 0, -172, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
+// const deadbird4 = new ThreeDModel('deadbird.glb', -38, -36, -184, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);const deadbird5 = new ThreeDModel('deadbird.glb', 18, -18, -16, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
+// //scene1.2
+// const deadbird6 = new ThreeDModel('deadbird.glb', 4, -28, -6, dtr(20), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
+// const deadbird7 = new ThreeDModel('deadbird.glb', -8, -34, -16, dtr(20), 0.8, THREE.MeshPhongMaterial, undefined, _scene);
+// const deadbird8 = new ThreeDModel('deadbird.glb', -68, -134, -116, dtr(20), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
+// const deadbird9 = new ThreeDModel('deadbird.glb', 68, -104, -176, dtr(20), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
+const tricycle = new ThreeDModel('tricycle.glb', 0, -164, -20, dtr(-45), 1.4, THREE.MeshPhongMaterial, '../assets/sounds/slut_ah_6.mp3', _scene);
 
 
 const allThingsINedAnimated = [
-powerPlant, powerPlant2, 
-deadbird, 
-deadbird2, 
-deadbird3, 
-deadbird4, 
-deadbird5, 
-deadbird6, 
-deadbird7,
-deadbird8,
-deadbird9,
+// powerPlant, powerPlant2, 
+// deadbird, 
+// deadbird2, 
+// deadbird3, 
+// deadbird4, 
+// deadbird5, 
+// deadbird6, 
+// deadbird7,
+// deadbird8,
+// deadbird9,
 tricycle,
 ]
 
+
 // const spacing = 40
 // for(let i = 0; i < 200; i++){ 
-//   const x = Math.random() * (spacing * 2) - spacing;
-//   const y = Math.random() * (spacing * 2) - spacing;
-//   const z = Math.random() * (spacing * 2) - spacing;
-//   const newThing = new ThreeDModel('deadbirdhvid.glb', x, y, z, undefined, _scene);
-//   allThingsINedAnimated.push(newThing);
-// }
+  //   const x = Math.random() * (spacing * 2) - spacing;
+  //   const y = Math.random() * (spacing * 2) - spacing;
+  //   const z = Math.random() * (spacing * 2) - spacing;
+  //   const newThing = new ThreeDModel('deadbirdhvid.glb', x, y, z, undefined, _scene);
+  //   allThingsINedAnimated.push(newThing);
+  // }
+  
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  
+  document.addEventListener('click', (event) => {
+    const meshes = allThingsINedAnimated.map((thing) => thing._3dmodel);
+    
+    // calculate mouse position in normalized device coordinates
+  // (-1 to +1) for both components
+  mouse.x = ( event.clientX / _vw ) * 2 - 1;
+  mouse.y = - ( event.clientY / _vh ) * 2 + 1;
+  raycaster.setFromCamera(mouse, _camera);
+  const intersects = raycaster.intersectObjects(meshes, true);
+  if(intersects.length > 0){
+    // rekursivt finde den første ting der har en userData property der hedder class
+    function findUserData(obj){
+      if(obj.userData.class){
+        return obj.userData.class;
+      }
+      if(obj.parent){
+        return findUserData(obj.parent);
+      }
+    }
+    // console.log(intersects[0].object);
+    const thing = findUserData(intersects[0].object);
+    // console.log(thing);
+    thing.playSound();
+
+
+    console.log(intersects);
+    // const thing = allThingsINedAnimated.find((thing) => thing._3dmodel === intersects[0].object);
+    // if(thing){
+    //   console.log(thing);
+    //   if(thing._lyd){
+    //     thing._lyd.play();
+    //   }
+    // }
+  }
+})
 
 //CLOCK:
 const clock = new THREE.Clock();
@@ -115,33 +156,20 @@ function buildCube(x, y, z){
 
 //buildCube(0, 0, 0);
 
+
+
+
 //Scroll ned på y-aksen:
-var _camY = _camera.position.y;
-function scrollCamY(event){
-  _camY -= event.deltaY * 0.01;
+const wheelFunction = new WheelFunction(_camera);
 
-  if(_camY > 0){ 
-    _camY = 0;
-  } //Her sikrer vi os, at _camY ikke kan være over 0.
-  _camera.position.y = _camY;
-  console.log(_camY);
-  
-};
-document.addEventListener("wheel", scrollCamY); //Lytter efter scroll på y-aksen, til _camY
-
-
-
-
-
-						
 
 
 //Lil GUI:
-const gui = new GUI();
-const _Camfolder = gui.addFolder("Camera position");
-_Camfolder.add(_camera.position, "x", -10, 10, 0.1);
-_Camfolder.add(_camera.position, "y", -200, 0, 0.1);
-_Camfolder.add(_camera.position, "z", -10, 10, 0.1);
+// const gui = new GUI();
+// const _Camfolder = gui.addFolder("Camera position");
+// _Camfolder.add(_camera.position, "x", -10, 10, 0.1);
+// _Camfolder.add(_camera.position, "y", -200, 0, 0.1);
+// _Camfolder.add(_camera.position, "z", -10, 10, 0.1);
 
 
 

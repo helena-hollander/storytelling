@@ -4,7 +4,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'lil-gui';
 
-console.log('Hello from 3dmodel.js');
 export default class ThreeDModel {
   _3dmodel = null;
   _sceneRef;
@@ -12,14 +11,14 @@ export default class ThreeDModel {
   _rotation = { x: 0, y: 0, z: 0 };
   _scale = 1; 
   _mesh = null;
-  _lyd = null;
   _mixer = null;
   _offset = Math.round(Math.random() * 10);
+  _that = this;
 
-  constructor(modelUrl, x, y, z, rY, scale, mesh, lyd, sceneRef) {
+  constructor(modelUrl, x, y, z, rY, scale, mesh, soundUrl, sceneRef) {
     this.modelUrl = modelUrl;
     this._sceneRef = sceneRef;
-    this._lyd = lyd;
+    this._soundUrl = soundUrl;
     this._position.x = x;
     this._position.y = y;
     this._position.z = z;
@@ -49,6 +48,23 @@ export default class ThreeDModel {
      //Noget med mesh... og skygger 
      this._3dmodel.mesh.castShadow = true;
      this._3dmodel.mesh.receiveShadow = true;
+
+      // Opret reference til class i userData
+      this._3dmodel.userData = { class: this };
+
+      //Load sound:
+      const listener = new THREE.AudioListener();
+      this._sceneRef.add(listener);
+
+      this._sound = new THREE.Audio(listener);
+      const audioLoader = new THREE.AudioLoader();
+      audioLoader.load(this._soundUrl, (buffer) => {
+        this._sound.setBuffer(buffer);
+        this._sound.setLoop(false);
+        this._sound.setVolume(0.8);
+      });
+
+
       this._sceneRef.add(this._3dmodel);
     }, undefined, (error) => {
       console.error('An error happened while loading the model:', error);
@@ -56,16 +72,15 @@ export default class ThreeDModel {
         console.error('Server response:', error.target.responseText);
       }
     });
-
-
-
   }
 
-  // playSound(){
-  //   if(this._lyd){
-  //     this._lyd.play();
-  //   }
-  // }
+  playSound(){
+    console.log('playSound');
+    if(this._sound && this._soundPlayed){
+      this._sound.play();
+      this._soundPlayed = true;
+    }
+  }
 
 }
 
