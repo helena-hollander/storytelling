@@ -6,7 +6,7 @@ import { GUI } from 'lil-gui';
 
 export default class ThreeDModel {
   _3dmodel = null;
-  _sceneRef = null;
+  _sceneRef;
   _position = { x: 0, y: 0, z: 0 };
   _rotation = { x: 0, y: 0, z: 0 };
   _scale = 1; 
@@ -24,6 +24,7 @@ export default class ThreeDModel {
     this._rotation.y = rY;
     this._scale = scale;
     this._mesh = mesh;
+    this._sceneRef = sceneRef;
     this.loadModel();
   }
 
