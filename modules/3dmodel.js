@@ -6,7 +6,7 @@ import { GUI } from 'lil-gui';
 
 export default class ThreeDModel {
   _3dmodel = null;
-  _sceneRef;
+  _sceneRef = null;
   _position = { x: 0, y: 0, z: 0 };
   _rotation = { x: 0, y: 0, z: 0 };
   _scale = 1; 
@@ -14,12 +14,10 @@ export default class ThreeDModel {
   _mixer = null;
   _offset = Math.round(Math.random() * 10);
   _that = this;
-  _soundPlayed = false;
+ 
 
-  constructor(modelUrl, x, y, z, rY, scale, mesh, soundUrl, sceneRef) {
+  constructor(modelUrl, x, y, z, rY, scale, mesh, sceneRef) {
     this.modelUrl = modelUrl;
-    this._sceneRef = sceneRef;
-    this._soundUrl = soundUrl;
     this._position.x = x;
     this._position.y = y;
     this._position.z = z;
@@ -46,24 +44,15 @@ export default class ThreeDModel {
       this._3dmodel.scale.set(this._scale, this._scale, this._scale);
       this._3dmodel.mesh = this._mesh;
       
-     //Noget med mesh... og skygger 
-     this._3dmodel.mesh.castShadow = true;
-     this._3dmodel.mesh.receiveShadow = true;
+    //  //Noget med mesh... og skygger 
+    //  this._3dmodel.mesh.castShadow = true;
+    //  this._3dmodel.mesh.receiveShadow = true;
 
       // Opret reference til class i userData
       this._3dmodel.userData = { class: this };
 
       //Load sound:
-      const listener = new THREE.AudioListener();
-      this._sceneRef.add(listener);
-
-      this._sound = new THREE.Audio(listener);
-      const audioLoader = new THREE.AudioLoader();
-      audioLoader.load(this._soundUrl, (buffer) => {
-        this._sound.setBuffer(buffer);
-        this._sound.setLoop(false);
-        this._sound.setVolume(0.8);
-      });
+    
 
 
       this._sceneRef.add(this._3dmodel);
@@ -77,10 +66,7 @@ export default class ThreeDModel {
 
   playSound(){
     console.log('playSound');
-    if(this._sound && this._soundPlayed){
-      this._sound.play();
-      this._soundPlayed = true;
-    }
+    
   }
 
 }
