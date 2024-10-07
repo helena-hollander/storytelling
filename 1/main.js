@@ -36,18 +36,32 @@ _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 
 
 //3dModel loader:
-const powerPlant = new ThreeDModel('powerplant2blend.glb', 0, -35, -18, dtr(0), 0.7, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird = new ThreeDModel('deadbirdhvid.glb', -10, 3, -10, dtr(0), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird2 = new ThreeDModel('deadbirdhvid.glb', 6, 0, -12, dtr(20), 0.5, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird3 = new ThreeDModel('deadbird_lang.glb', 14, 0, -12, dtr(20), 0.2, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird4 = new ThreeDModel('deadbird_lang2.glb', -8, -6, -14, dtr(20), 0.2, THREE.MeshPhongMaterial, undefined, _scene);
-const deadbird5 = new ThreeDModel('deadbird_lang2.glb', 8, -8, -16, dtr(20), 0.18, THREE.MeshPhongMaterial, undefined, _scene);
+const powerPlant = new ThreeDModel('powerplantbirds1.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, undefined, _scene);
+const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird = new ThreeDModel('deadbird.glb', -70, 3, -90, dtr(0), 1, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird2 = new ThreeDModel('deadbird.glb', 16, 10, -46, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird3 = new ThreeDModel('deadbird.glb', 24, 0, -172, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird4 = new ThreeDModel('deadbird.glb', -38, -36, -184, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);const deadbird5 = new ThreeDModel('deadbird.glb', 18, -18, -16, dtr(20), 1, THREE.MeshPhongMaterial, undefined, _scene);
 //scene1.2
-const deadbird6 = new ThreeDModel('deadbird_lang2.glb', 4, -28, -6, dtr(20), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
-//const blommetrae = new ThreeDModel('blommetrae_copy_oli.glb', 0, -6, -10, dtr(-190), 0.7, undefined, _scene); //evt gøt snot meget længere, exporter ny med textur. Og så bare behold alle atributes, men træk ned ad y-aksen.
+const deadbird6 = new ThreeDModel('deadbird.glb', 4, -28, -6, dtr(20), 1.2, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird7 = new ThreeDModel('deadbird.glb', -8, -34, -16, dtr(20), 0.8, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird8 = new ThreeDModel('deadbird.glb', -68, -134, -116, dtr(20), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
+const deadbird9 = new ThreeDModel('deadbird.glb', 68, -104, -176, dtr(20), 0.9, THREE.MeshPhongMaterial, undefined, _scene);
+const tricycle = new ThreeDModel('tricycle.glb', 0, -164, -20, dtr(-45), 1.4, THREE.MeshPhongMaterial, undefined, _scene);
+
 
 const allThingsINedAnimated = [
-powerPlant, deadbird, deadbird2, deadbird3, deadbird4, deadbird5, deadbird6
+powerPlant, powerPlant2, 
+deadbird, 
+deadbird2, 
+deadbird3, 
+deadbird4, 
+deadbird5, 
+deadbird6, 
+deadbird7,
+deadbird8,
+deadbird9,
+tricycle,
 ]
 
 // const spacing = 40
@@ -114,7 +128,7 @@ function buildCube(x, y, z){
 const gui = new GUI();
 const _Camfolder = gui.addFolder("Camera position");
 _Camfolder.add(_camera.position, "x", -10, 10, 0.1);
-_Camfolder.add(_camera.position, "y", -100, 0, 0.1);
+_Camfolder.add(_camera.position, "y", -200, 0, 0.1);
 _Camfolder.add(_camera.position, "z", -10, 10, 0.1);
 
 
