@@ -115,7 +115,19 @@ function buildCube(x, y, z){
 
 //buildCube(0, 0, 0);
 
+//Scroll ned på y-aksen:
+var _camY = _camera.position.y;
+function scrollCamY(event){
+  _camY -= event.deltaY * 0.01;
 
+  if(_camY > 0){ 
+    _camY = 0;
+  } //Her sikrer vi os, at _camY ikke kan være over 0.
+  _camera.position.y = _camY;
+  console.log(_camY);
+  
+};
+document.addEventListener("wheel", scrollCamY); //Lytter efter scroll på y-aksen, til _camY
 
 
 
@@ -161,4 +173,4 @@ resized(null);
 //Hvis det virker og vi console.log(_vw, _vw); burde vi få en masse tal, der fortæller vinduets str. når vi ændrer den.
 
 //Import orbit controls:
-const _controls = new OrbitControls(_camera, _canvasEl);
+//const _controls = new OrbitControls(_camera, _canvasEl);
