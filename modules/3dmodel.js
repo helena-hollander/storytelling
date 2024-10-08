@@ -3,6 +3,7 @@ import GSAP from 'gsap';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'lil-gui';
+import {Howl, Howler} from 'howler';
 
 export default class ThreeDModel {
   _3dmodel = null;
@@ -14,9 +15,11 @@ export default class ThreeDModel {
   _mixer = null;
   _offset = Math.round(Math.random() * 10);
   _that = this;
+  _soundPath;
+  _soundPath2;
  
 
-  constructor(modelUrl, x, y, z, rY, scale, mesh, sceneRef) {
+  constructor(modelUrl, x, y, z, rY, scale, mesh, soundPath, soundPath2, sceneRef) {
     this.modelUrl = modelUrl;
     this._position.x = x;
     this._position.y = y;
@@ -25,6 +28,8 @@ export default class ThreeDModel {
     this._scale = scale;
     this._mesh = mesh;
     this._sceneRef = sceneRef;
+    this._soundPath = soundPath;
+    this._soundPath2 = soundPath2;
     this.loadModel();
   }
 
@@ -51,8 +56,6 @@ export default class ThreeDModel {
 
       // Opret reference til class i userData
       this._3dmodel.userData = { class: this };
-
-      //Load sound:
     
 
 
@@ -67,7 +70,15 @@ export default class ThreeDModel {
 
   playSound(){
     console.log('playSound');
+    var sound = new Howl({
+      src: [`../assets/sounds/${this._soundPath}`]
+    });
     
+    sound.play();
+    var sound2 = new Howl({
+      src: [`../assets/sounds/${this._soundPath2}`]
+    });
+    sound2.play();
   }
 
 }

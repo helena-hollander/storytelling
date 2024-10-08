@@ -19,6 +19,10 @@ var _vh = window.innerHeight;
 //Create a scene:
 const _scene = new THREE.Scene();
 const _camera = new THREE.PerspectiveCamera(50, _vw / _vh, .1, 1000);
+//LYD
+const listener = new THREE.AudioListener();
+_camera.add( listener );
+
 _scene.background = new THREE.Color(0x4680b0);
 const _renderer = new THREE.WebGLRenderer({canvas: _canvasEl, antialias:true}); //antialias: true giver en blødere render
 _renderer.setSize(_vw, _vh);
@@ -37,19 +41,19 @@ _scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
 
 
 //3dModel loader:
-const powerPlant = new ThreeDModel('powerplantbirds1.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, _scene);
-const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, _scene);
-const deadbird = new ThreeDModel('deadbird.glb', -70, 3, -90, dtr(0), 1, THREE.MeshPhongMaterial, _scene);
-const deadbird2 = new ThreeDModel('deadbird.glb', 16, 10, -46, dtr(20), 1, THREE.MeshPhongMaterial, _scene);
-const deadbird3 = new ThreeDModel('deadbird.glb', 24, 0, -172, dtr(20), 1, THREE.MeshPhongMaterial, _scene);
-const deadbird4 = new ThreeDModel('deadbird.glb', -38, -36, -184, dtr(20), 1, THREE.MeshPhongMaterial, _scene);
-const deadbird5 = new ThreeDModel('deadbird.glb', 18, -18, -16, dtr(20), 1, THREE.MeshPhongMaterial, _scene);
+const powerPlant = new ThreeDModel('powerplantbirds1.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, 'whistleL.mp3', undefined, _scene);
+const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, 'whistleR.mp3', undefined, _scene);
+const deadbird = new ThreeDModel('deadbird.glb', -70, 3, -90, dtr(0), 1, THREE.MeshPhongMaterial, 'end_ah_7.mp3', undefined, _scene);
+const deadbird2 = new ThreeDModel('deadbird.glb', 16, 10, -46, dtr(20), 1, THREE.MeshPhongMaterial, 'end_ah_5.mp3', undefined, _scene);
+const deadbird3 = new ThreeDModel('deadbird.glb', 24, 0, -172, dtr(20), 1, THREE.MeshPhongMaterial, 'end_ah_4.mp3', undefined, _scene);
+const deadbird4 = new ThreeDModel('deadbird.glb', -38, -36, -184, dtr(20), 1, THREE.MeshPhongMaterial,'end_ah_3.mp3',  undefined, _scene);
+const deadbird5 = new ThreeDModel('deadbird.glb', 18, -18, -16, dtr(20), 1, THREE.MeshPhongMaterial, 'end_ah_6.mp3', undefined, _scene);
 //scene1.2
-const deadbird6 = new ThreeDModel('deadbird.glb', 4, -28, -6, dtr(20), 1.2, THREE.MeshPhongMaterial, _scene);
-const deadbird7 = new ThreeDModel('deadbird.glb', -8, -34, -16, dtr(20), 0.8, THREE.MeshPhongMaterial, _scene);
-const deadbird8 = new ThreeDModel('deadbird.glb', -68, -134, -116, dtr(20), 0.9, THREE.MeshPhongMaterial, _scene);
-const deadbird9 = new ThreeDModel('deadbird.glb', 68, -104, -176, dtr(20), 0.9, THREE.MeshPhongMaterial, _scene);
-const tricycle = new ThreeDModel('tricycle.glb', 0, -164, -20, dtr(-45), 1.4, THREE.MeshPhongMaterial, _scene);
+const deadbird6 = new ThreeDModel('deadbird.glb', 4, -28, -6, dtr(20), 1.2, THREE.MeshPhongMaterial, 'end_ah.mp3', undefined, _scene);
+const deadbird7 = new ThreeDModel('deadbird.glb', -8, -34, -16, dtr(20), 0.8, THREE.MeshPhongMaterial, 'end_ah_2.mp3', undefined, _scene);
+const deadbird8 = new ThreeDModel('deadbird.glb', -68, -134, -116, dtr(20), 0.9, THREE.MeshPhongMaterial, 'end_ah_7.mp3', undefined, _scene);
+const deadbird9 = new ThreeDModel('deadbird.glb', 68, -104, -176, dtr(20), 0.9, THREE.MeshPhongMaterial, 'end_ah_6.mp3', undefined, _scene);
+const tricycle = new ThreeDModel('tricycle.glb', 0, -164, -20, dtr(-45), 1.4, THREE.MeshPhongMaterial, 'laugh_cry_R1.mp3', 'laugh_cry_L1.mp3', _scene);
 
 
 const allThingsINedAnimated = [
