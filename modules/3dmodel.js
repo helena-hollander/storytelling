@@ -70,20 +70,24 @@ export default class ThreeDModel {
     });
   }
 
+  
   playSound(){
     console.log('playSound');
     var sound = new Howl({
-      src: [`../assets/sounds/${this._soundPath}`]
+      src: [`../assets/sounds/${this._soundPath}`],
+      volume: 1.5
     });
     
     sound.play();
     var sound2 = new Howl({
-      src: [`../assets/sounds/${this._soundPath2}`]
+      src: [`../assets/sounds/${this._soundPath2}`],
+      volume: 2
     });
     sound2.play();
 
     var sound3 = new Howl({
-      src: [`../assets/sounds/${this._soundPath3}`]
+      src: [`../assets/sounds/${this._soundPath3}`],
+      volume: 1.5
     });
     sound3.play();
   }

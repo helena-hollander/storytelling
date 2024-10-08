@@ -21,6 +21,8 @@ var _vh = window.innerHeight;
 
 //Create a scene:
 const _scene = new THREE.Scene();
+const fogColor = new THREE.Color(0x0c0c57);
+_scene.fog = new THREE.Fog(fogColor, 5, 290); //Fog i scene
 const _camera = new THREE.PerspectiveCamera(50, _vw / _vh, .1, 1000);
 //LYD
 const listener = new THREE.AudioListener();
@@ -49,22 +51,36 @@ _composer.addPass(_filmPass); //Her tilføjer vi film passen til vores composer
 
 
 //LYS:
-const _ambientlight = new THREE.AmbientLight(0xffffff, 0.5); //Her laver vi et ambient lys, der lyser hele scenen op, med en farve og en intensitet
+const _ambientlight = new THREE.AmbientLight(0x1b1178, 1.5); //Her laver vi et ambient lys, der lyser hele scenen op, med en farve og en intensitet
 //_scene.add(_ambientlight); //Her tilføjer vi lyset til scenen
-const _dirLight = new THREE.DirectionalLight(0xe6a9f5, 8); //Her laver vi et retningsbestemt lys, med en farve og en intensitet
+const _dirLight = new THREE.DirectionalLight(0x9238b5, 10); //Her laver vi et retningsbestemt lys, med en farve og en intensitet
 _dirLight.position.set(10, -300, 10); //Her bestemmer vi lyskildens position
 _dirLight.castShadow = true; //Her siger vi at vores lys skal kaste skygger
-_dirLight.setSize = 1000;
+_dirLight.setSize = 3000;
 _scene.add(_dirLight); //Her tilføjer vi lyset til scenen
-const _dirLightHelper = new THREE.DirectionalLightHelper(_dirLight, 1);
-_scene.add(_dirLightHelper);
+
+
+const _dirLight3 = new THREE.DirectionalLight(0x29388c, 10);
+_dirLight3.position.set(-20, 0, -50);
+_dirLight3.rotateY(dtr(90));
+_dirLight3.castShadow = true;
+_scene.add(_dirLight3);
+
+// const _dirLight2 = new THREE.DirectionalLight(0xe6a9f5, 7); //Her laver vi et retningsbestemt lys, med en farve og en intensitet
+// _dirLight2.position.set(8, -100, -5); //Her bestemmer vi lyskildens position
+// _dirLight2.castShadow = true; //Her siger vi at vores lys skal kaste skygger
+// _dirLight2.setSize = 1000;
+// //_scene.add(_dirLight2); //Her tilføjer vi lyset til scenen
+
+const _dirLight3Helper = new THREE.DirectionalLightHelper(_dirLight3, 1);
+//_scene.add(_dirLight3Helper);
 
 
 //3dModel loader:
-const powerPlant = new ThreeDModel('powerplantbirds1.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, 'whistleL.mp3', undefined, undefined, _scene);
-const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, 'whistleR.mp3', undefined, undefined, _scene);
+const powerPlant = new ThreeDModel('powerplantbirds_red.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, undefined, 'whistleL.mp3', undefined, _scene);
+const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, undefined, 'whistleR.mp3', undefined, _scene);
 //const powerPlant3 = new ThreeDModel('powerplantbirds2.glb', 86, -115, -164, dtr(0), 1.5, THREE.MeshPhongMaterial, 'whistleR.mp3', undefined, undefined, _scene);
-const powerPlant4 = new ThreeDModel('powerplantbirds1.glb', -86, -15, -284, dtr(0), 1.6, THREE.MeshPhongMaterial, 'whistleR.mp3', undefined, undefined, _scene);
+const powerPlant4 = new ThreeDModel('powerplantbirds_red2.glb', -86, -15, -204, dtr(0), 1.6, THREE.MeshPhongMaterial, undefined, undefined, undefined, _scene);
 const deadbird = new ThreeDModel('deadbird.glb', -70, 3, -90, dtr(0), 1, THREE.MeshPhongMaterial, 'end_ah_7.mp3', undefined, undefined, _scene);
 const deadbird2 = new ThreeDModel('deadbird.glb', 16, 10, -46, dtr(20), 1, THREE.MeshPhongMaterial, 'end_ah_5.mp3', undefined, undefined, _scene);
 const deadbird3 = new ThreeDModel('deadbird.glb', 24, 0, -172, dtr(20), 1, THREE.MeshPhongMaterial, 'end_ah_4.mp3', undefined, undefined, _scene);
@@ -76,9 +92,9 @@ const deadbird7 = new ThreeDModel('deadbird.glb', -8, -34, -16, dtr(20), 0.8, TH
 const deadbird8 = new ThreeDModel('deadbird.glb', -68, -134, -116, dtr(20), 0.9, THREE.MeshPhongMaterial, 'end_ah_7.mp3', undefined, undefined, _scene);
 const deadbird9 = new ThreeDModel('deadbird.glb', 68, -104, -176, dtr(20), 0.9, THREE.MeshPhongMaterial, 'end_ah_6.mp3', undefined, undefined, _scene);
 const deadbird10 = new ThreeDModel('deadbird.glb', 88, -54, -206, dtr(20), 0.8, THREE.MeshPhongMaterial, 'end_ah_6.mp3', undefined, undefined, _scene);
-const tricycle = new ThreeDModel('tricycle.glb', 0, -184, -20, dtr(-45), 1.5, THREE.MeshPhongMaterial, 'laugh_cry_R1.mp3', 'laugh_cry_L1.mp3', undefined, _scene);
+const tricycle = new ThreeDModel('tricycle.glb', 0, -184, -20, dtr(-45), 1.5, THREE.MeshPhongMaterial, 'laugh_cry_R1.mp3', undefined, 'laugh_cry_L1.mp3',  _scene);
 const car = new ThreeDModel('car.glb', -30, -184, -75, dtr(0), 2.5, THREE.MeshPhongMaterial, 'carcrash.mp3', undefined, undefined, _scene);
-const blommetrae = new ThreeDModel('blommetrae_lang.glb', 10, -254, -35, dtr(-180), 2.2, THREE.MeshPhongMaterial, 'laugh_cry_creep.mp3', 'klikR.mp3', 'klikL.mp3', _scene);
+const blommetrae = new ThreeDModel('blommetrae_lang.glb', 10, -254, -35, dtr(-180), 2.2, THREE.MeshPhongMaterial, 'klikR.mp3', 'laugh_cry_creep.mp3', 'klikL.mp3', _scene);
 
 
 const allThingsINedAnimated = [
@@ -146,6 +162,18 @@ const clock = new THREE.Clock();
 //Scroll ned på y-aksen:
 const wheelFunction = new WheelFunction(_camera);
 
+//BG sound:
+function playBgSound(){
+  console.log('playBgSound');
+  var soundBg = new Howl({
+    src: [`../assets/sounds/electric_wind.mp3`],
+    loop: true,
+    volume: 0.08
+  });
+  soundBg.play();
+}
+playBgSound();
+
 //ANIMATE
 
 
@@ -195,17 +223,17 @@ function buildCube(x, y, z){
 
 
 //Lil GUI:
-const gui = new GUI();
+//const gui = new GUI();
 // const _Camfolder = gui.addFolder("Camera position");
 // _Camfolder.add(_camera.position, "x", -10, 10, 0.1);
 // _Camfolder.add(_camera.position, "y", -200, 0, 0.1);
 // _Camfolder.add(_camera.position, "z", -10, 10, 0.1);
 
 const _DirLightFolder = gui.addFolder("Directional Light");
-_DirLightFolder.add(_dirLight.position, "x", -10, 10, 0.1);
-_DirLightFolder.add(_dirLight.position, "y", -10, 10, 0.1);
-_DirLightFolder.add(_dirLight.position, "z", -10, 10, 0.1);
-_DirLightFolder.add(_dirLight, "intensity", 0, 10, 0.1);
+_DirLightFolder.add(_dirLight3.position, "x", -100, 20, 0.1);
+_DirLightFolder.add(_dirLight3.position, "y", -20, 20, 0.1);
+_DirLightFolder.add(_dirLight3.position, "z", -200, 20, 0.1);
+_DirLightFolder.add(_dirLight3, "intensity", 0, 100, 0.1);
 
 
 
