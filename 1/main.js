@@ -63,6 +63,8 @@ _scene.add(_dirLightHelper);
 //3dModel loader:
 const powerPlant = new ThreeDModel('powerplantbirds1.glb', 0, -85, -68, dtr(0), 2, THREE.MeshPhongMaterial, 'whistleL.mp3', undefined, undefined, _scene);
 const powerPlant2 = new ThreeDModel('powerplantbirds2.glb', -6, -75, -4, dtr(0), 1.2, THREE.MeshPhongMaterial, 'whistleR.mp3', undefined, undefined, _scene);
+//const powerPlant3 = new ThreeDModel('powerplantbirds2.glb', 86, -115, -164, dtr(0), 1.5, THREE.MeshPhongMaterial, 'whistleR.mp3', undefined, undefined, _scene);
+const powerPlant4 = new ThreeDModel('powerplantbirds1.glb', -86, -15, -284, dtr(0), 1.6, THREE.MeshPhongMaterial, 'whistleR.mp3', undefined, undefined, _scene);
 const deadbird = new ThreeDModel('deadbird.glb', -70, 3, -90, dtr(0), 1, THREE.MeshPhongMaterial, 'end_ah_7.mp3', undefined, undefined, _scene);
 const deadbird2 = new ThreeDModel('deadbird.glb', 16, 10, -46, dtr(20), 1, THREE.MeshPhongMaterial, 'end_ah_5.mp3', undefined, undefined, _scene);
 const deadbird3 = new ThreeDModel('deadbird.glb', 24, 0, -172, dtr(20), 1, THREE.MeshPhongMaterial, 'end_ah_4.mp3', undefined, undefined, _scene);
@@ -73,14 +75,18 @@ const deadbird6 = new ThreeDModel('deadbird.glb', 4, -28, -6, dtr(20), 1.2, THRE
 const deadbird7 = new ThreeDModel('deadbird.glb', -8, -34, -16, dtr(20), 0.8, THREE.MeshPhongMaterial, 'end_ah_2.mp3', undefined, undefined, _scene);
 const deadbird8 = new ThreeDModel('deadbird.glb', -68, -134, -116, dtr(20), 0.9, THREE.MeshPhongMaterial, 'end_ah_7.mp3', undefined, undefined, _scene);
 const deadbird9 = new ThreeDModel('deadbird.glb', 68, -104, -176, dtr(20), 0.9, THREE.MeshPhongMaterial, 'end_ah_6.mp3', undefined, undefined, _scene);
+const deadbird10 = new ThreeDModel('deadbird.glb', 88, -54, -206, dtr(20), 0.8, THREE.MeshPhongMaterial, 'end_ah_6.mp3', undefined, undefined, _scene);
 const tricycle = new ThreeDModel('tricycle.glb', 0, -184, -20, dtr(-45), 1.5, THREE.MeshPhongMaterial, 'laugh_cry_R1.mp3', 'laugh_cry_L1.mp3', undefined, _scene);
 const car = new ThreeDModel('car.glb', -30, -184, -75, dtr(0), 2.5, THREE.MeshPhongMaterial, 'carcrash.mp3', undefined, undefined, _scene);
-const blommetrae = new ThreeDModel('blommetrae_black_ani.glb', 10, -254, -35, dtr(-180), 2.2, THREE.MeshPhongMaterial, 'laugh_cry_creep.mp3', 'klikR.mp3', 'klikL.mp3', _scene);
+const blommetrae = new ThreeDModel('blommetrae_lang.glb', 10, -254, -35, dtr(-180), 2.2, THREE.MeshPhongMaterial, 'laugh_cry_creep.mp3', 'klikR.mp3', 'klikL.mp3', _scene);
 
 
 const allThingsINedAnimated = [
-powerPlant, powerPlant2, 
-deadbird, deadbird2, deadbird3, deadbird4, deadbird5, deadbird6, deadbird7, deadbird8, deadbird9, tricycle, car, blommetrae, 
+powerPlant, powerPlant2,
+//powerPlant3,
+powerPlant4, 
+deadbird, deadbird2, deadbird3, deadbird4, deadbird5, deadbird6, deadbird7, deadbird8, deadbird9, deadbird10, 
+tricycle, car, blommetrae, 
 ]
 
 
