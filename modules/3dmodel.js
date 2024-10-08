@@ -17,9 +17,10 @@ export default class ThreeDModel {
   _that = this;
   _soundPath;
   _soundPath2;
- 
+  _soundPath3;
+  
 
-  constructor(modelUrl, x, y, z, rY, scale, mesh, soundPath, soundPath2, sceneRef) {
+  constructor(modelUrl, x, y, z, rY, scale, mesh, soundPath, soundPath2, soundPath3, sceneRef) {
     this.modelUrl = modelUrl;
     this._position.x = x;
     this._position.y = y;
@@ -30,6 +31,7 @@ export default class ThreeDModel {
     this._sceneRef = sceneRef;
     this._soundPath = soundPath;
     this._soundPath2 = soundPath2;
+    this._soundPath3 = soundPath3;
     this.loadModel();
   }
 
@@ -79,6 +81,11 @@ export default class ThreeDModel {
       src: [`../assets/sounds/${this._soundPath2}`]
     });
     sound2.play();
+
+    var sound3 = new Howl({
+      src: [`../assets/sounds/${this._soundPath3}`]
+    });
+    sound3.play();
   }
 
 }
