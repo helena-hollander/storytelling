@@ -50,11 +50,11 @@ export default class ThreeDModel {
       this._3dmodel.scale.set(this._scale, this._scale, this._scale);
       this._3dmodel.mesh = this._mesh;
       
-    //  //Noget med mesh... og skygger 
-    //  this._3dmodel.mesh.castShadow = true;
-    //  this._3dmodel.mesh.receiveShadow = true;
+     //Noget med mesh... og skygger 
+     this._3dmodel.mesh.castShadow = true;
+     this._3dmodel.mesh.receiveShadow = true;
 
-      // Opret reference til class i userData
+     // Opret reference til class i userData
       this._3dmodel.userData = { class: this };
     
 

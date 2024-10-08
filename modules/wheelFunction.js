@@ -14,12 +14,12 @@ export default class WheelFunction {
   }
 
   scrollCamY(event){
-    this._camY -= event.deltaY * 0.01;
+    this._camY -= event.deltaY * 0.01; //Hastighed på scroll
     console.log(this)
     if(this._camY > 0){ 
       this._camY = 0;
     } //Her sikrer vi os, at _camY ikke kan være over 0.
-    this._camera.position.y = this._camY;
+   
     console.log(this._camY);  
   }
 
