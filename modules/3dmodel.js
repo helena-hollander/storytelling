@@ -38,7 +38,7 @@ export default class ThreeDModel {
   loadModel() {
     const loader = new GLTFLoader();
     console.log('Loading model:', this.modelUrl);
-    loader.load('../assets/3dmodels/' + this.modelUrl, (gltf) => {
+    loader.load('/assets/3dmodels/' + this.modelUrl, (gltf) => {
       this._3dmodel = gltf.scene;
       this._mixer = new THREE.AnimationMixer(this._3dmodel);
       // this._mixer.clipAction(gltf.animations[0]).play();
@@ -74,19 +74,19 @@ export default class ThreeDModel {
   playSound(){
     console.log('playSound');
     var sound = new Howl({
-      src: [`../assets/sounds/${this._soundPath}`],
+      src: [`/assets/sounds/${this._soundPath}`],
       volume: 1.5
     });
     
     sound.play();
     var sound2 = new Howl({
-      src: [`../assets/sounds/${this._soundPath2}`],
+      src: [`/assets/sounds/${this._soundPath2}`],
       volume: 2
     });
     sound2.play();
 
     var sound3 = new Howl({
-      src: [`../assets/sounds/${this._soundPath3}`],
+      src: [`/assets/sounds/${this._soundPath3}`],
       volume: 1.5
     });
     sound3.play();
