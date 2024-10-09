@@ -18,6 +18,20 @@ var _canvasEl = document.getElementById("three");
 var _vw = window.innerWidth;
 var _vh = window.innerHeight;
 
+//Mouse move påvirker cam.rotation.y
+let targetRotationY = 0;
+let currentRotationY = 0;
+
+document.addEventListener('mousemove', onMouseMove, false);
+
+let mouseX = 0;
+const windowHalfX = window.innerWidth / 2;
+
+function onMouseMove(event) {
+  mouseX = (event.clientX - windowHalfX) / windowHalfX;
+  targetRotationY = mouseX * -0.1; // Adjust the multiplier to control the rotation speed
+}
+
 
 //Create a scene:
 const _scene = new THREE.Scene();
@@ -192,6 +206,9 @@ function animate() {
   const cameraTargetPosition = new THREE.Vector3(0, wheelFunction._camY, 0); //Ease på scroll
   _camera.position.lerp(cameraTargetPosition, 0.05); //Hvor smooth det går
 
+  //Musen og cam rotate.y
+  currentRotationY = THREE.MathUtils.lerp(currentRotationY, targetRotationY, 0.08); //Hvor smooth den går
+  _camera.rotation.y = currentRotationY;
 
   _composer.render(); //Her render vi vores composer, så vi kan bruge vores postprocessing effekter.
   
